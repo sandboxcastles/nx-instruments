@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@instruments/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@instruments/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@instruments/core-data": ["libs/core-data/src/index.ts"],
+      "@instruments/core-state": ["libs/core-state/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
