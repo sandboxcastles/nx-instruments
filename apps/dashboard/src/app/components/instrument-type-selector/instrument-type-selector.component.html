@@ -1,0 +1,8 @@
+<select #typeSelect [value]="control.value" (change)="change.emit(typeSelect.value)">
+	<option disabled value="">-- Select An Instrument Type --</option>
+	<option value="brass">Brass</option>
+	<option value="string">String</option>
+	<option value="woodwind">Woodwind</option>
+	<option value="percussion">Percussion</option>
+	<option value="other">Other</option>
+</select>

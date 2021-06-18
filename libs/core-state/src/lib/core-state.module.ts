@@ -1,32 +1,40 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
+import { RootStoreConfig, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import * as fromInstrument from './instrument/instrument.reducer';
-import { InstrumentEffects } from './instrument/instrument.effects';
+import * as fromInstruments from './instruments/instruments.reducer';
+import { InstrumentEffects } from './instruments/instruments.effects';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreDataModule } from '@instruments/core-data';
+import { reducers } from '.';
+
+const STORE_NAME = 'instruments-store';
+const storeConfig: RootStoreConfig<any> = {
+  runtimeChecks: {
+    strictActionImmutability: true,
+    strictActionSerializability: true,
+    strictStateImmutability: true,
+    strictStateSerializability: true,
+  },
+}
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forRoot(
-      {},
-      {
-        metaReducers: !environment.production ? [] : [],
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true,
-        },
-      }
+      reducers,
+			storeConfig
     ),
     EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+		StoreDevtoolsModule.instrument({ maxAge: 25, name: STORE_NAME }),
     StoreModule.forFeature(
-      fromInstrument.INSTRUMENT_FEATURE_KEY,
-      fromInstrument.reducer
+      fromInstruments.INSTRUMENTS_FEATURE_KEY,
+      fromInstruments.reducer
     ),
     EffectsModule.forFeature([InstrumentEffects]),
+		HttpClientModule,
+		CoreDataModule
   ],
 })
 export class CoreStateModule {}

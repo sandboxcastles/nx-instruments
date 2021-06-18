@@ -1,1 +1,19 @@
-<p>instrument works!</p>
+<div class="form">
+	<instruments-instrument-create (instrumentCreated)="createInstrument($event)"></instruments-instrument-create>
+</div>
+<hr>
+<div class="display">
+	<instruments-instrument-list
+		*ngIf="instruments$ | async as instruments"
+		class="list"
+		[instruments]="instruments"
+		(instrumentSelected)="selectInstrument($event)">
+	</instruments-instrument-list>
+	<instruments-instrument-detail
+		*ngIf="selectedInstrument$ | async as selectedInstrument"
+		class="detail"
+		[instrument]="selectedInstrument"
+		(instrumentUpdated)="updateInstrument($event)"
+		(instrumentDeleted)="deleteInstrument($event)">
+	</instruments-instrument-detail>
+</div>

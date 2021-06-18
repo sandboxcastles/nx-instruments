@@ -8,10 +8,10 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { NxModule, DataPersistence } from '@nrwl/angular';
 import { hot } from '@nrwl/angular/testing';
 
-import { InstrumentEffects } from './instrument.effects';
-import * as InstrumentActions from './instrument.actions';
+import { InstrumentEffects } from './instruments.effects';
+import * as InstrumentsActions from './instruments.actions';
 
-describe('InstrumentEffects', () => {
+describe('InstrumentsEffects', () => {
   let actions: Observable<any>;
   let effects: InstrumentEffects;
 
@@ -31,10 +31,10 @@ describe('InstrumentEffects', () => {
 
   describe('init$', () => {
     it('should work', () => {
-      actions = hot('-a-|', { a: InstrumentActions.init() });
+      actions = hot('-a-|', { a: InstrumentsActions.init() });
 
       const expected = hot('-a-|', {
-        a: InstrumentActions.loadInstrumentSuccess({ instrument: [] }),
+        a: InstrumentsActions.loadInstrumentsSuccess({ instruments: [] }),
       });
 
       expect(effects.init$).toBeObservable(expected);

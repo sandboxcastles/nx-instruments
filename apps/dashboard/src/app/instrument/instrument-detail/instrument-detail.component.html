@@ -1,1 +1,8 @@
-<p>instrument-detail works!</p>
+<div class="detail-view" [formGroup]="formGroup">
+	<div class="detail-view-row">
+		<input formControlName="title" />
+		<button (click)="instrumentDeleted.emit(instrument.id)">X</button>
+	</div>
+	<instruments-instrument-type-selector class="detail-view-row" [control]="formGroup.controls['type']" (change)="updateType($event)"></instruments-instrument-type-selector>
+	<button [disabled]="!(formGroup.valid && formGroup.dirty)" (click)="instrumentUpdated.emit(formGroup.value)">Update</button>
+</div>
