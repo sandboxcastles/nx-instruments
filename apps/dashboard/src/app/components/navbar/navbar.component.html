@@ -1,0 +1,5 @@
+<nav>
+	<ng-container *ngFor="let link of links">
+		<a [routerLink]="link.path">{{link.title}}</a>
+	</ng-container>
+</nav>

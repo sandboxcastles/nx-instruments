@@ -1,0 +1,16 @@
+<div class="instrument-form" [formGroup]="formGroup">
+	<h2>Add Instrument</h2>
+	<div class="instrument-form-row">
+		<label class="title-column" for="title">Title:</label>
+		<input formControlName="title">
+	</div>
+	<div class="instrument-form-row">
+		<label for="type">Type:</label>
+		<instruments-instrument-type-selector [control]="formGroup.controls['type']" (change)="updateType($event)"></instruments-instrument-type-selector>
+	</div>
+	<div class="instrument-form-row">
+		<div class="title-column"></div>
+		<button class="create-button" [disabled]="formGroup.invalid" (click)="addInstrument()">Add</button>
+	</div>
+
+</div>

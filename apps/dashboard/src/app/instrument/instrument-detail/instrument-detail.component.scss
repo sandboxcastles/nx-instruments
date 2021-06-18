@@ -1,0 +1,21 @@
+.detail-view {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-self: flex-start;
+	gap: 1rem;
+
+	.detail-view-row {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+
+		:first-child {
+			flex: 1 0 75%;
+		}
+
+		// input, select {
+		// 	flex: 1 0 75%;
+		// }
+	}
+}

@@ -1,0 +1,24 @@
+:host {
+	display: flex;
+	flex-direction: column;
+}
+.form {
+	//
+}
+.display {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+
+	.column {
+		flex: 1 0 50%;
+	}
+
+	.list {
+		@extend .column;
+	}
+
+	.detail {
+		@extend .column;
+	}
+}

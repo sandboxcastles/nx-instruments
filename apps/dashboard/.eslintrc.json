@@ -23,6 +23,11 @@
             "type": "element",
             "prefix": "instruments",
             "style": "kebab-case"
+          },
+          {
+            "type": "attribute",
+            "prefix": "instruments",
+            "style": "camelCase"
           }
         ]
       }
