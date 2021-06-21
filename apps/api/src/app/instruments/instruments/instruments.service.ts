@@ -1,42 +1,39 @@
-import { Instrument, InstrumentType } from '@instruments/api-interfaces';
-import { Injectable } from '@nestjs/common';
+import { Instrument } from '@instruments/api-interfaces';
+import { HttpService, Injectable } from '@nestjs/common';
+import { from, Observable, of } from 'rxjs';
+import { map, mapTo, tap } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
+import { AxiosResponse } from 'axios';
 
-const initialInstruments = [{ id: uuidv4(), title: 'Tenor Sax', type: InstrumentType.Woodwind }, { id: uuidv4(), title: 'PRS Custom Limited 22', type: InstrumentType.String}];
+// const initialInstruments = [{ id: uuidv4(), title: 'Tenor Sax', type: InstrumentType.Woodwind }, { id: uuidv4(), title: 'PRS Custom Limited 22', type: InstrumentType.String}];
 
 @Injectable()
 export class InstrumentsService {
-	instruments = initialInstruments;
-	getInstruments(): Instrument[] {
-		return this.instruments;
+	constructor(private http: HttpService) {}
+	instruments: Instrument[];
+	getInstruments(): Observable<Instrument[]> {
+		return this.getData(this.http.get('http://localhost:3000/instruments'));
 	}
-	getInstrument(id: string): Instrument {
-		return this.instruments.find(instrument => instrument.id === id);
+	getInstrument(id: string): Observable<Instrument> {
+		return this.getData(this.http.get(`http://localhost:3000/instruments/${id}`));
 	}
-	createInstrument(instrument: Instrument): Instrument {
+	createInstrument(instrument: Instrument): Observable<Instrument> {
 		const newInstrument: Instrument = {
 			...instrument,
 			id: uuidv4()
 		};
-		this.instruments = [...this.instruments, newInstrument];
-		return newInstrument;
+		this.http.get('').pipe(map(res => res.data))
+		return this.getData<Instrument>(this.http.post('http://localhost:3000/instruments', newInstrument));
 	}
 	//TODO: Not the best way to do this, probably...
-	updateInstrument(id: string, instrument: Instrument): Instrument {
-		const existingInstrumentIndex = this.instruments.findIndex(ins => ins.id === id);
-		if (existingInstrumentIndex > -1) {
-			const existingInstrument = {...this.instruments[existingInstrumentIndex], ...instrument, id};
-			this.instruments[existingInstrumentIndex] = existingInstrument;
-			return existingInstrument;
-		}
-		return null;
+	updateInstrument(id: string, instrument: Instrument): Observable<Instrument> {
+		return this.getData(this.http.put(`http://localhost:3000/instruments/${id}`, instrument));
 	}
-	deleteInstrument(id: string): { id: string; } {
-		const filteredInstruments = this.instruments.filter(instrument => instrument.id !== id);
-		if (filteredInstruments.length === this.instruments.length) {
-			return null;
-		}
-		this.instruments = filteredInstruments;
-		return { id };
+	deleteInstrument(id: string): Observable<{ id: string }> {
+		return this.getData(this.http.delete(`http://localhost:3000/instruments/${id}`)).pipe(mapTo({ id }));
+	}
+
+	private getData<T>(res$: Observable<AxiosResponse<T>>): Observable<T> {
+		return res$.pipe(map(res => res.data));
 	}
 }

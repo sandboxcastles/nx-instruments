@@ -11,11 +11,14 @@ import { CoreStateModule } from '@instruments/core-state';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InstrumentCreateComponent } from './instrument/instrument-create/instrument-create.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { InstrumentTypeSelectorComponent } from './components/instrument-type-selector/instrument-type-selector.component';
+import { FormControlDropdownComponent } from './components/form-control-dropdown/form-control-dropdown.component';
+import { InstrumentTypeSelectorComponent } from './instrument/instrument-type-selector/instrument-type-selector.component';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '@instruments/material';
 
 @NgModule({
-  declarations: [AppComponent, InstrumentComponent, InstrumentDetailComponent, InstrumentListComponent, InstrumentCreateComponent, NavbarComponent, InstrumentTypeSelectorComponent],
-  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule, AppRoutingModule, CoreStateModule],
+  declarations: [AppComponent, InstrumentComponent, InstrumentDetailComponent, InstrumentListComponent, InstrumentCreateComponent, NavbarComponent, FormControlDropdownComponent, InstrumentTypeSelectorComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule, CoreStateModule, RouterModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
 })

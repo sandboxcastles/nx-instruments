@@ -3,17 +3,20 @@
 </div>
 <hr>
 <div class="display">
-	<instruments-instrument-list
-		*ngIf="instruments$ | async as instruments"
-		class="list"
-		[instruments]="instruments"
-		(instrumentSelected)="selectInstrument($event)">
-	</instruments-instrument-list>
-	<instruments-instrument-detail
-		*ngIf="selectedInstrument$ | async as selectedInstrument"
-		class="detail"
-		[instrument]="selectedInstrument"
-		(instrumentUpdated)="updateInstrument($event)"
-		(instrumentDeleted)="deleteInstrument($event)">
-	</instruments-instrument-detail>
+	<mat-card
+			class="list">
+		<instruments-instrument-list
+			*ngIf="instruments$ | async as instruments"
+			[instruments]="instruments"
+			(instrumentSelected)="selectInstrument($event)">
+		</instruments-instrument-list>
+	</mat-card>
+	<mat-card class="detail">
+		<instruments-instrument-detail
+			*ngIf="selectedInstrument$ | async as selectedInstrument"
+			[instrument]="selectedInstrument"
+			(instrumentUpdated)="updateInstrument($event)"
+			(instrumentDeleted)="deleteInstrument($event)">
+		</instruments-instrument-detail>
+	</mat-card>
 </div>

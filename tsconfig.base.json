@@ -1,24 +1,25 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@instruments/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@instruments/core-data": ["libs/core-data/src/index.ts"],
-      "@instruments/core-state": ["libs/core-state/src/index.ts"]
-    }
-  },
-  "exclude": ["node_modules", "tmp"]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "esnext",
+		"lib": ["es2017", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@instruments/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+			"@instruments/core-data": ["libs/core-data/src/index.ts"],
+			"@instruments/core-state": ["libs/core-state/src/index.ts"],
+			"@instruments/material": ["libs/material/src/index.ts"]
+		}
+	},
+	"exclude": ["node_modules", "tmp"]
 }
