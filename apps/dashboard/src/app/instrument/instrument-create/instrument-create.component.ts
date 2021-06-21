@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Instrument } from '@instruments/api-interfaces';
 
@@ -9,12 +9,13 @@ import { Instrument } from '@instruments/api-interfaces';
 })
 export class InstrumentCreateComponent implements OnInit {
 	@Output() instrumentCreated = new EventEmitter<Instrument>(true);
+	@ViewChild('titleInput') titleInput: ElementRef<HTMLInputElement>;
 	formBuilder: FormBuilder;
 	formGroup: FormGroup;
-  ngOnInit(): void {
+	ngOnInit(): void {
 		this.formBuilder = new FormBuilder();
 		this.createFormGroup();
-  }
+	}
 	createFormGroup(): void {
 		this.formGroup = this.formBuilder.group({
 			title: ['', Validators.required],
@@ -29,5 +30,11 @@ export class InstrumentCreateComponent implements OnInit {
 	addInstrument(): void {
 		this.instrumentCreated.emit(this.formGroup.value);
 		this.createFormGroup();
+		// this.focusElement(this.titleInput);
+		this.focusElement(this.titleInput);
+	}
+
+	focusElement(input: ElementRef<HTMLElement>): void {
+		input?.nativeElement.focus();
 	}
 }

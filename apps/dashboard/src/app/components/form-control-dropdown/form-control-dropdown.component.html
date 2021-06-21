@@ -1,0 +1,10 @@
+<select #dropdown
+	[value]="control.value"
+	(change)="change.emit(dropdown.value)">
+	<option *ngFor="let option of allOptions"
+		[disabled]="option.disabled"
+		[selected]="option.value === control.value"
+		[value]="option.value">
+		{{ option.text }}
+	</option>
+</select>

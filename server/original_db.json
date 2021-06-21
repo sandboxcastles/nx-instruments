@@ -1,0 +1,19 @@
+{
+	"instruments": [
+	  {
+		"id": "tenor_saxophone",
+		"title": "Tenor Saxophone",
+		"type": "woodwind"
+	  },
+	  {
+		"id": "alto_saxophone",
+		"title": "Alto Saxophone",
+		"type": "woodwind"
+	  },
+	  {
+		"id": "prs_custom_22",
+		"title": "PRS Custom 22",
+		"type": "string"
+	  }
+	]
+  }

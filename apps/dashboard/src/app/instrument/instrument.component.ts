@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Instrument, InstrumentType } from '@instruments/api-interfaces';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { Instrument } from '@instruments/api-interfaces';
 
 import { InstrumentsFacade } from '@instruments/core-state';
 import { Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'instruments-instrument',
@@ -25,7 +25,7 @@ export class InstrumentComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
 		this.reset();
-		// this.instrumentsStore.mutations$.pipe(takeUntil(this.destroy$)).subscribe(() => this.reset());
+		this.instrumentsStore.mutations$.pipe(takeUntil(this.destroy$)).subscribe(() => this.reset());
   }
 
 	buildFormArray(instruments: Instrument[]): void {

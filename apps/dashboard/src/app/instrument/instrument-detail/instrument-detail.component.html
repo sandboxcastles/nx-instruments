@@ -3,6 +3,7 @@
 		<input formControlName="title" />
 		<button (click)="instrumentDeleted.emit(instrument.id)">X</button>
 	</div>
+	<!-- <instruments-form-control-dropdown class="detail-view-row" [control]="formGroup.controls['type']" (change)="updateType($event)"></instruments-form-control-dropdown> -->
 	<instruments-instrument-type-selector class="detail-view-row" [control]="formGroup.controls['type']" (change)="updateType($event)"></instruments-instrument-type-selector>
 	<button [disabled]="!(formGroup.valid && formGroup.dirty)" (click)="instrumentUpdated.emit(formGroup.value)">Update</button>
 </div>

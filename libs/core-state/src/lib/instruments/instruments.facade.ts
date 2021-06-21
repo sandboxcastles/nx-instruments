@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Instrument } from '@instruments/api-interfaces';
 import { Action, ActionsSubject, select, Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import * as InstrumentsActions from './instruments.actions';
@@ -18,9 +17,9 @@ export class InstrumentsFacade {
 
   mutations$ = this.actions$.pipe(
     filter((action: Action) =>
-      action.type === InstrumentsActions.createInstrument({} as any).type ||
-      action.type === InstrumentsActions.updateInstrument({} as any).type ||
-      action.type === InstrumentsActions.deleteInstrument({} as any).type
+      action.type === InstrumentsActions.createInstrumentSuccess({} as any).type ||
+      action.type === InstrumentsActions.updateInstrumentSuccess({} as any).type ||
+      action.type === InstrumentsActions.deleteInstrumentSuccess({} as any).type
     )
   );
 
@@ -52,45 +51,45 @@ export class InstrumentsFacade {
   }
 }
 
-const initialInstruments: Instrument[] = [];
+// const initialInstruments: Instrument[] = [];
 
-@Injectable({
-  providedIn: 'root'
-})
-export class InstrumentsFacadeWithSubjects {
-	instruments: Instrument[] = [];
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class InstrumentsFacadeWithSubjects {
+// 	instruments: Instrument[] = [];
 
-	loadedSubject = new BehaviorSubject(false);
-	allInstrumentsSubject = new BehaviorSubject<Instrument[]>(this.instruments);
-	selectedInstrumentSubject = new BehaviorSubject<Instrument | undefined>(undefined);
-	loaded$ = this.loadedSubject.asObservable();
-	allInstruments$ = this.allInstrumentsSubject.asObservable();
-	selectedInstrument$ = this.selectedInstrumentSubject.asObservable();
+// 	loadedSubject = new BehaviorSubject(false);
+// 	allInstrumentsSubject = new BehaviorSubject<Instrument[]>(this.instruments);
+// 	selectedInstrumentSubject = new BehaviorSubject<Instrument | undefined>(undefined);
+// 	loaded$ = this.loadedSubject.asObservable();
+// 	allInstruments$ = this.allInstrumentsSubject.asObservable();
+// 	selectedInstrument$ = this.selectedInstrumentSubject.asObservable();
 
-  selectInstrument(selectedId: string) {
-		const instrument = this.instruments.find(i => i.id === selectedId);
-		this.selectedInstrumentSubject.next(instrument);
-  }
+//   selectInstrument(selectedId: string) {
+// 		const instrument = this.instruments.find(i => i.id === selectedId);
+// 		this.selectedInstrumentSubject.next(instrument);
+//   }
 
-  loadInstruments() {
-		this.allInstrumentsSubject.next(initialInstruments);
-  }
+//   loadInstruments() {
+// 		this.allInstrumentsSubject.next(initialInstruments);
+//   }
 
-  createInstrument(instrument: Instrument) {
-		this.instruments.push({ ...instrument, id: uuidv4() });
-		this.allInstrumentsSubject.next(this.instruments);
-  }
+//   createInstrument(instrument: Instrument) {
+// 		this.instruments.push({ ...instrument, id: uuidv4() });
+// 		this.allInstrumentsSubject.next(this.instruments);
+//   }
 
-  updateInstrument(id: string, instrument: Instrument) {
-		this.instruments = this.instruments.map(i => i.id === id ? ({...i, ...instrument, id }) : i);
-		this.allInstrumentsSubject.next(this.instruments);
-  }
+//   updateInstrument(id: string, instrument: Instrument) {
+// 		this.instruments = this.instruments.map(i => i.id === id ? ({...i, ...instrument, id }) : i);
+// 		this.allInstrumentsSubject.next(this.instruments);
+//   }
 
-  deleteInstrument(id: string) {
-		const existingInstrumentIndex = this.instruments.findIndex(i => i.id === id);
-		if (existingInstrumentIndex > -1) {
-			this.instruments = this.instruments.filter(i => i.id !== id);
-			this.allInstrumentsSubject.next(this.instruments);
-		}
-  }
-}
+//   deleteInstrument(id: string) {
+// 		const existingInstrumentIndex = this.instruments.findIndex(i => i.id === id);
+// 		if (existingInstrumentIndex > -1) {
+// 			this.instruments = this.instruments.filter(i => i.id !== id);
+// 			this.allInstrumentsSubject.next(this.instruments);
+// 		}
+//   }
+// }
